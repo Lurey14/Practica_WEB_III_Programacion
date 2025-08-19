@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Practica1</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Practica1.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="cabeza">
+        <span class="cabeza-logo"><b>GESTION DE TAREAS</b></span>
+    </div>
+    <div class="contenedor-menu">
+        <nav class="menu-principal">
+            <ul>
+                <li>
+                    <a class="menu-link" asp-area="" asp-page="/Inicio">
+                        Inicio
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" asp-area="" asp-page="/Tareas">
+                        Lista Tareas
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" asp-area="" asp-page="/TareasRealizadas">
+                        Lista Tareas Realizadas
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" asp-area="" asp-page="/TareasPendientes">
+                        Lista Tareas Pendientes
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" asp-area="" asp-page="/TareasFinalizadas">
+                        Lista Tareas Finalizadas
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" asp-area="" asp-page="/TareasCanceladas">
+                        Lista Tareas Canceladas
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <main class="contenedor-uno" role="main">
+            <div class="contenido-tareas">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="titulo-tareas">Tareas Asignadas</h2>
+                    <a href="/Tareas/Agregar" class="btn btn-primary btn-agregar-tarea">Agregar Tarea</a>
+                </div>
+                <div class="tabla-responsive">
+                    <table class="tabla-tareas">
+                        <thead>
+                            <tr>
+                                <th>Nombre Tarea</th>
+                                <th>Fecha Vencimiento</th>
+                                <th>Estado Tarea</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Revisar reporte mensual</td>
+                                <td>20-08-2025</td>
+                                <td>Pendiente</td>
+                                <td>
+                                    <a href="/Tareas/Editar/1" class="btn btn-sm btn-outline-info">Editar</a>
+                                    <a href="/Tareas/Eliminar/1" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Enviar informe final</td>
+                                <td>20-08-2025</td>
+                                <td>Finalizada</td>
+                                <td>
+                                    <a href="/Tareas/Editar/2" class="btn btn-sm btn-outline-info">Editar</a>
+                                    <a href="/Tareas/Eliminar/2" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
