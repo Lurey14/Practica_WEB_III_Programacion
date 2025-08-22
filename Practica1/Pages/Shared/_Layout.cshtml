@@ -13,35 +13,20 @@
         <span class="cabeza-logo"><b>GESTION DE TAREAS</b></span>
     </div>
     <div class="contenedor-menu">
-        <nav class="menu-principal">
+        @* <nav class="menu-principal">
             <ul>
                 <li>
-                    <a class="menu-link" asp-area="" asp-page="/Inicio">
+                    <a class="menu-link" asp-area="" asp-page="/Inicio" href="~/Index">
                         Inicio
                     </a>
                 </li>
                 <li>
-                    <a class="menu-link" asp-area="" asp-page="/Tareas">
-                        Lista Tareas
-                    </a>
-                </li>
-                <li>
-                    <a class="menu-link" asp-area="" asp-page="/TareasRealizadas">
-                        Lista Tareas Realizadas
-                    </a>
-                </li>
-                <li>
-                    <a class="menu-link" asp-area="" asp-page="/TareasPendientes">
-                        Lista Tareas Pendientes
-                    </a>
-                </li>
-                <li>
-                    <a class="menu-link" asp-area="" asp-page="/TareasFinalizadas">
+                    <a class="menu-link" asp-area="" asp-page="/TareasFinalizadas" href="~/Finalizada">
                         Lista Tareas Finalizadas
                     </a>
                 </li>
                 <li>
-                    <a class="menu-link" asp-area="" asp-page="/TareasCanceladas">
+                    <a class="menu-link" asp-area="" asp-page="/TareasCanceladas" href="~/Cancelada">
                         Lista Tareas Canceladas
                     </a>
                 </li>
@@ -49,9 +34,8 @@
         </nav>
         <main class="contenedor-uno" role="main">
             <div class="contenido-tareas">
-                <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="fila-entre">
                     <h2 class="titulo-tareas">Tareas Asignadas</h2>
-                    <a href="/Tareas/Agregar" class="btn btn-primary btn-agregar-tarea">Agregar Tarea</a>
                 </div>
                 <div class="tabla-responsive">
                     <table class="tabla-tareas">
@@ -69,8 +53,8 @@
                                 <td>20-08-2025</td>
                                 <td>Pendiente</td>
                                 <td>
-                                    <a href="/Tareas/Editar/1" class="btn btn-sm btn-outline-info">Editar</a>
-                                    <a href="/Tareas/Eliminar/1" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                    <a href="" class="btn-editar">Editar</a>
+                                    <a href="" class="btn-eliminar">Eliminar</a>
                                 </td>
                             </tr>
                             <tr>
@@ -78,14 +62,36 @@
                                 <td>20-08-2025</td>
                                 <td>Finalizada</td>
                                 <td>
-                                    <a href="/Tareas/Editar/2" class="btn btn-sm btn-outline-info">Editar</a>
-                                    <a href="/Tareas/Eliminar/2" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                                    <a href="" class="btn-editar">Editar</a>
+                                    <a href="" class="btn-eliminar">Eliminar</a>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+            @RenderBody()
+        </main> *@
+        <nav class="menu-principal">
+            <ul>
+                <li>
+                    <a class="menu-link" asp-page="/Index">
+                        Inicio
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" asp-page="/Finalizada">
+                        Lista Tareas Finalizadas
+                    </a>
+                </li>
+                <li>
+                    <a class="menu-link" asp-page="/Cancelada">
+                        Lista Tareas Canceladas
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <main class="contenedor-uno" role="main">
             @RenderBody()
         </main>
     </div>

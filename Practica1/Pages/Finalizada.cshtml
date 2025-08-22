@@ -1,7 +1,7 @@
 ﻿@page
-@model Practica1.Pages.IndexModel
+@model Practica1.Pages.FinalizadaModel
 @{
-    ViewData["Title"] = "Tareas Asignadas";
+    ViewData["Title"] = "Tareas Finalizadas";
 }
 
 <div class="fila-entre" style="margin-top:20px;">
@@ -80,7 +80,7 @@
             @if (Model.Tareas.Count == 0)
             {
                 <tr>
-                    <td colspan="4">No hay tareas para mostrar</td>
+                    <td colspan="4">No hay tareas finalizadas para mostrar</td>
                 </tr>
             }
             else
@@ -91,30 +91,9 @@
                         <td>@tarea.nombreTarea</td>
                         <td>@tarea.fechaVencimiento</td>
                         <td>
-                            @if (tarea.estado == "Pendiente")
-                            {
-                                <span style="background-color: #ffc107; color: #212529; padding: 3px 8px; border-radius: 4px; font-size: 0.85em;">
-                                    @tarea.estado
-                                </span>
-                            }
-                            else if (tarea.estado == "En curso")
-                            {
-                                <span style="background-color: #17a2b8; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85em;">
-                                    @tarea.estado
-                                </span>
-                            }
-                            else if (tarea.estado == "Finalizado")
-                            {
-                                <span style="background-color: #28a745; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85em;">
-                                    @tarea.estado
-                                </span>
-                            }
-                            else
-                            {
-                                <span style="background-color: #dc3545; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85em;">
-                                    @tarea.estado
-                                </span>
-                            }
+                            <span style="background-color: #28a745; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85em;">
+                                @tarea.estado
+                            </span>
                         </td>
                         <td>
                             <a href="#" class="btn-editar">Editar</a>
