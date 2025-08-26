@@ -4,66 +4,104 @@
     ViewData["Title"] = "Tareas Asignadas";
 }
 
+<div style="display:flex; justify-content:space-between; width:100%; align-items:center; margin-bottom: 15px; margin-top: 20px;">
+    <h2 class="titulo-tareas">Tareas Asignadas</h2>
+    <a href="/TareaCrear" class="btn-agregar-tarea">Crear Tarea</a>
+</div>
+
 <div class="fila-entre" style="margin-top:20px;">
-    <form method="get" style="margin-bottom:15px;">
-        <label>
-            Mostrar:
-            <select name="tamanio" onchange="this.form.submit()" style="margin:0 5px; padding:5px; border-radius:4px; border:1px solid #ccc;">
-                @if (Model.TamanoPagina == 5)
+    <form method="get" style="margin-bottom:15px; display: flex; align-items: center; flex-wrap: wrap;">
+        <div style="margin-right: 20px; margin-bottom: 10px;">
+            <label style="font-weight: 500; margin-right: 5px;">Filtrar por estado:</label>
+            <select name="filtro" onchange="this.form.submit()" style="padding:5px; border-radius:4px; border:1px solid #ccc;">
+                @if (Model.FiltroActual == "Todos")
                 {
-                    <option value="5" selected="selected">5</option>
+                    <option value="Todos" selected="selected">Todos</option>
                 }
                 else
                 {
-                    <option value="5">5</option>
+                    <option value="Todos">Todos</option>
                 }
 
-                @if (Model.TamanoPagina == 10)
+                @if (Model.FiltroActual == "Pendiente")
                 {
-                    <option value="10" selected="selected">10</option>
+                    <option value="Pendiente" selected="selected">Pendiente</option>
                 }
                 else
                 {
-                    <option value="10">10</option>
+                    <option value="Pendiente">Pendiente</option>
                 }
 
-                @if (Model.TamanoPagina == 15)
+                @if (Model.FiltroActual == "Encurso")
                 {
-                    <option value="15" selected="selected">15</option>
+                    <option value="Encurso" selected="selected">En curso</option>
                 }
                 else
                 {
-                    <option value="15">15</option>
-                }
-
-                @if (Model.TamanoPagina == 25)
-                {
-                    <option value="25" selected="selected">25</option>
-                }
-                else
-                {
-                    <option value="25">25</option>
-                }
-
-                @if (Model.TamanoPagina == 50)
-                {
-                    <option value="50" selected="selected">50</option>
-                }
-                else
-                {
-                    <option value="50">50</option>
+                    <option value="Encurso">En curso</option>
                 }
             </select>
-            tareas por página
-        </label>
+        </div>
+
+        <div>
+            <label>
+                Mostrar:
+                <select name="tamanio" onchange="this.form.submit()" style="margin:0 5px; padding:5px; border-radius:4px; border:1px solid #ccc;">
+                    @if (Model.TamanoPagina == 5)
+                    {
+                        <option value="5" selected="selected">5</option>
+                    }
+                    else
+                    {
+                        <option value="5">5</option>
+                    }
+
+                    @if (Model.TamanoPagina == 10)
+                    {
+                        <option value="10" selected="selected">10</option>
+                    }
+                    else
+                    {
+                        <option value="10">10</option>
+                    }
+
+                    @if (Model.TamanoPagina == 15)
+                    {
+                        <option value="15" selected="selected">15</option>
+                    }
+                    else
+                    {
+                        <option value="15">15</option>
+                    }
+
+                    @if (Model.TamanoPagina == 25)
+                    {
+                        <option value="25" selected="selected">25</option>
+                    }
+                    else
+                    {
+                        <option value="25">25</option>
+                    }
+                </select>
+                tareas por pagina
+            </label>
+        </div>
     </form>
 </div>
 
 <div style="color:#444; margin-bottom:15px;">
-    Mostrando @(Model.TotalTareas == 0 ? 0 : ((Model.PaginaActual-1)*Model.TamanoPagina)+1) 
-    - 
-    @(Math.Min(Model.PaginaActual*Model.TamanoPagina, Model.TotalTareas)) 
+    Mostrando @(Model.TotalTareas == 0 ? 0 : ((Model.PaginaActual - 1) * Model.TamanoPagina) + 1)
+    -
+    @(Math.Min(Model.PaginaActual * Model.TamanoPagina, Model.TotalTareas))
     de @Model.TotalTareas tareas
+    @if (Model.FiltroActual == "Pendiente")
+    {
+        <span style="font-weight: bold;"> (Pendientes)</span>
+    }
+    else if (Model.FiltroActual == "En curso")
+    {
+        <span style="font-weight: bold;"> (En curso)</span>
+    }
 </div>
 
 <div class="tabla-responsive">
@@ -93,25 +131,19 @@
                         <td>
                             @if (tarea.estado == "Pendiente")
                             {
-                                <span style="background-color: #ffc107; color: #212529; padding: 3px 8px; border-radius: 4px; font-size: 0.85em;">
+                                <span style="background-color: #d39cbc; color: #212529; padding: 3px 8px; border-radius: 4px; font-size: 0.85em;">
                                     @tarea.estado
                                 </span>
                             }
                             else if (tarea.estado == "En curso")
                             {
-                                <span style="background-color: #17a2b8; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85em;">
-                                    @tarea.estado
-                                </span>
-                            }
-                            else if (tarea.estado == "Finalizado")
-                            {
-                                <span style="background-color: #28a745; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85em;">
+                                <span style="background-color: #a15da2; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85em;">
                                     @tarea.estado
                                 </span>
                             }
                             else
                             {
-                                <span style="background-color: #dc3545; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85em;">
+                                <span style="background-color: #7a2c8c; color: white; padding: 3px 8px; border-radius: 4px; font-size: 0.85em;">
                                     @tarea.estado
                                 </span>
                             }
@@ -132,11 +164,11 @@
         @for (int i = 1; i <= Model.TotalPaginas; i++)
         {
             <li style="margin: 0 5px;">
-                <a href="?pagina=@i&tamanio=@Model.TamanoPagina" 
-                   style="padding: 8px 12px; text-decoration: none; border-radius: 4px; 
-                         @(i == Model.PaginaActual ? 
-                            "background-color: #3163c9; color: white;" : 
-                            "background-color: #eaf1fb; color: #333;")">
+                <a href="?pagina=@i&tamanio=@Model.TamanoPagina&filtro=@Model.FiltroActual"
+                   style="padding: 8px 12px; text-decoration: none; border-radius: 4px;
+                    @(i == Model.PaginaActual ?
+                        "background-color: #3163c9; color: white;" :
+                        "background-color: #eaf1fb; color: #333;")">
                     @i
                 </a>
             </li>

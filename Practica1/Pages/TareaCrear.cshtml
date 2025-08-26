@@ -1,0 +1,37 @@
+﻿@page
+@model Practica1.Pages.TareaCrearModel
+@{
+}
+<div class="crear-tarea-contenedor">
+    <h2 class="titulo-tareas" style="margin-bottom: 20px;">Crear Nueva Tarea</h2>
+
+    <form method="post" class="formulario-tarea">
+        <div class="form-grupo">
+            <label for="nombreTarea">Nombre de la Tarea:</label>
+            <input type="text" id="nombreTarea" name="nombreTarea" required
+                   class="form-control" style="width: 100%; padding: 8px;">
+        </div>
+
+        <div class="form-grupo">
+            <label for="fechaVencimiento">Fecha de Vencimiento:</label>
+            <input type="date" id="fechaVencimiento" name="fechaVencimiento" required
+                   class="form-control" style="width: 100%; padding: 8px;">
+        </div>
+
+        <div class="form-grupo">
+            <label for="estado">Estado:</label>
+            <select id="estado" name="estado" required
+                    class="form-control" style="width: 100%; padding: 8px;">
+                <option value="Pendiente">Pendiente</option>
+                <option value="En curso">En curso</option>
+                <option value="Finalizado">Finalizado</option>
+                <option value="Cancelado">Cancelado</option>
+            </select>
+        </div>
+
+        <div class="form-botones" style="margin-top: 25px;">
+            <button type="submit">Guardar Tarea</button>
+            <a href="/Index">Cancelar</a>
+        </div>
+    </form>
+</div>

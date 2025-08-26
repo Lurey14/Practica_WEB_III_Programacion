@@ -12,14 +12,16 @@ public class IndexModel : PageModel
     public int TamanoPagina { get; set; } = 5;
     public int TotalPaginas { get; set; } = 1;
     public int TotalTareas { get; set; } = 0;
+    public string FiltroActual { get; set; } = "todos";
 
-    public void OnGet(int pagina = 1, int tamanio = 5)
+    public void OnGet(int pagina = 1, int tamanio = 5, string filtro = "todos")
     {
         if (pagina < 1) pagina = 1;
         if (tamanio < 1) tamanio = 5;
 
         PaginaActual = pagina;
         TamanoPagina = tamanio;
+        FiltroActual = filtro;
 
         try
         {
@@ -29,9 +31,20 @@ public class IndexModel : PageModel
                 var jsonContent = System.IO.File.ReadAllText(jsonFilePath);
                 var todasLasTareas = JsonSerializer.Deserialize<List<Tarea>>(jsonContent) ?? new List<Tarea>();
 
-                var tareasActivas = todasLasTareas
-                    .Where(t => t.estado == "Pendiente" || t.estado == "En curso")
-                    .ToList();
+                List<Tarea> tareasActivas;
+
+                switch (FiltroActual.ToLower())
+                {
+                    case "pendiente":
+                        tareasActivas = todasLasTareas.Where(t => t.estado == "Pendiente").ToList();
+                        break;
+                    case "encurso":
+                        tareasActivas = todasLasTareas.Where(t => t.estado == "En curso").ToList();
+                        break;
+                    default:
+                        tareasActivas = todasLasTareas.Where(t => t.estado == "Pendiente" || t.estado == "En curso").ToList();
+                        break;
+                }
 
                 TotalTareas = tareasActivas.Count;
                 TotalPaginas = (int)Math.Ceiling(TotalTareas / (double)TamanoPagina);
