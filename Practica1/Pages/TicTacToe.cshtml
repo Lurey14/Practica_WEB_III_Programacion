@@ -1,0 +1,73 @@
+@page
+@model Practica1.Pages.TicTacToeModel
+@{
+    ViewData["Title"] = "Tic Tac Toe Game";
+}
+
+<link rel="stylesheet" href="~/css/tictactoe.css" asp-append-version="true" />
+
+<div class="game-container">
+    <div class="game-header">
+        <h1>Tic Tac Toe</h1>
+        <div class="game-info">
+            <div class="player-turn">
+                <span id="currentPlayer">Player X</span>'s turn
+            </div>
+            <div class="game-level">
+                Level: <span id="gameLevel">1</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Battery and System Status -->
+    <div class="system-status">
+        <div class="battery-status">
+            <span class="status-label">Battery:</span>
+            <span id="batteryLevel">Checking...</span>
+            <span id="chargingStatus"></span>
+        </div>
+        <div class="volume-status">
+            <span class="status-label">Volume:</span>
+            <span id="volumeLevel">50%</span>
+            <input type="range" id="volumeControl" min="0" max="100" value="50" class="volume-slider">
+        </div>
+    </div>
+
+    <!-- Game Board -->
+    <div class="game-board" id="gameBoard">
+        <div class="cell" data-index="0"></div>
+        <div class="cell" data-index="1"></div>
+        <div class="cell" data-index="2"></div>
+        <div class="cell" data-index="3"></div>
+        <div class="cell" data-index="4"></div>
+        <div class="cell" data-index="5"></div>
+        <div class="cell" data-index="6"></div>
+        <div class="cell" data-index="7"></div>
+        <div class="cell" data-index="8"></div>
+    </div>
+
+    <!-- Game Controls -->
+    <div class="game-controls">
+        <button id="resetGame" class="btn-reset">New Game</button>
+        <button id="levelUp" class="btn-level">Level Up</button>
+    </div>
+
+    <!-- Game Status -->
+    <div class="game-status">
+        <div id="gameMessage" class="game-message">Make your move!</div>
+        <div id="scoreBoard" class="score-board">
+            <div class="score">Player X: <span id="scoreX">0</span></div>
+            <div class="score">Player O: <span id="scoreO">0</span></div>
+            <div class="score">Draws: <span id="scoreDraw">0</span></div>
+        </div>
+    </div>
+
+    <!-- Warning Messages -->
+    <div id="batteryWarning" class="warning-message" style="display: none;">
+        ⚠️ Low battery! Game performance may be affected.
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/tictactoe.js" asp-append-version="true"></script>
+}
